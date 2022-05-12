@@ -19,8 +19,15 @@ endmacro()
  find_package(SFML 2.5.1 COMPONENTS system graphics audio network window REQUIRED)
 
 include_directories(${SFML_INCLUDE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/include)
+
 add_executable (ray_tracer ${SOURCE_FILES})
-target_link_libraries(ray_tracer ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-target_link_libraries(ray_tracer sfml-graphics sfml-audio sfml-window)
 add_subdirectory(include)
-print_all_variables()
+# target_link_libraries(ray_tracer ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+target_link_libraries(ray_tracer sfml-graphics sfml-audio sfml-window)
+# target_include_directories(${PROJECT_NAME} PUBLIC 
+# "${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/include"
+# )
+# target_link_libraries(ray_tracer include)
+
+# print_all_variables()
