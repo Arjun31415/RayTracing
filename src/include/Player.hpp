@@ -14,13 +14,13 @@
 #include <vector>
 inline namespace Object
 {
-  constexpr const double EPSILON = 1e-7;
-  class Player
-  {
+constexpr const double EPSILON = 1e-7;
+class Player
+{
     double x, y, r;
     constexpr const static double DELTA = 0.5;
     const static unsigned int POINT_COUNT = 50;
-    constexpr const static int FOV = 170;
+    constexpr const static int FOV = 120;
     const static unsigned int DTHETA = 10;
     double w, h;
     void moveX(double);
@@ -37,5 +37,5 @@ inline namespace Object
     void moveUp();
     void moveDown();
     void draw(sf::RenderWindow &);
-  };
+};
 } // namespace Object
