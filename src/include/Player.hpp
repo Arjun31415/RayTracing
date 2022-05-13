@@ -1,3 +1,11 @@
+/**
+ * @file Player.hpp
+ * @author Arjun
+ * @brief Player class header file
+ * @version 0.1
+ * @date 2022-05-13
+ *
+ */
 #pragma once
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -6,9 +14,9 @@
 #include <vector>
 inline namespace Object
 {
-constexpr const double EPSILON = 1e-7;
-class Player
-{
+  constexpr const double EPSILON = 1e-7;
+  class Player
+  {
     double x, y, r;
     constexpr const static double DELTA = 0.5;
     const static unsigned int POINT_COUNT = 50;
@@ -29,5 +37,5 @@ class Player
     void moveUp();
     void moveDown();
     void draw(sf::RenderWindow &);
-};
+  };
 } // namespace Object

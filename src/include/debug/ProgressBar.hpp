@@ -1,5 +1,12 @@
-#ifndef PROGRESS_BAR_H
-#define PROGRESS_BAR_H
+/**
+ * @file ProgressBar.hpp
+ * @author Arjun
+ * @brief progress bar header file
+ * @version 0.1
+ * @date 2022-05-13
+ *
+ */
+#pragma once
 
 #include <string>
 
@@ -61,5 +68,3 @@ private:
     bool mEnded;
     size_t mLengthOfLastPrintedMessage;
 };
-
-#endif /* PROGRESS_BAR_H */

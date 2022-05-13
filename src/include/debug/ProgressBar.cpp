@@ -1,3 +1,13 @@
+/**
+ * @file ProgressBar.cpp
+ * @author Arjun
+ * @brief generates a progress bar
+ * @version 0.1
+ * @date 2022-05-13
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include "ProgressBar.hpp"
 #include <iostream>
 #include <iomanip>

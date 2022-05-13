@@ -1,3 +1,12 @@
+/**
+ * @file main.cpp
+ * @author Arjun
+ * @brief Main file for executing of ray-tracing
+ * @version 0.1
+ * @date 2022-05-13
+ *
+ *
+ */
 #define debugging
 #include "include/Player.hpp"
 #include <SFML/Graphics.hpp>
