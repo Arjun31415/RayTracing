@@ -1,4 +1,6 @@
 add_subdirectory(debug)
-target_sources(ray_tracer PUBLIC Player.hpp Player.cpp Geometry.hpp Geometry.cpp)
-target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-
+# target_sources(ray_tracer PUBLIC Player.hpp Player.cpp Geometry.hpp Geometry.cpp)
+# target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+set(includes_source_files Player.hpp Player.cpp Geometry.hpp Geometry.cpp)
+add_library(includes ${includes_source_files})
+target_link_libraries(includes MyDebug)

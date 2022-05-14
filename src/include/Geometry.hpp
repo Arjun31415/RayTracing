@@ -7,6 +7,7 @@
 #include <set>
 #include <unordered_set>
 #include <queue>
+#include <ostream>
 
 namespace Geometry
 {
@@ -109,7 +110,15 @@ namespace Geometry
             else
                 return this->x < b.x;
         }
+        template <typename tt>
+        friend std::ostream &operator<<(std::ostream &os, const Point<tt> &);
     };
+    template <typename T>
+    std::ostream &operator<<(std::ostream &os, const Point<T> &a)
+    {
+        os << "( " << a.x << ", " << a.y << ", " << a.z << " )";
+        return os;
+    }
     /**
      * @brief calculates the inverse square root of a number,
      * using fast inverse square root algorithm found in Quake III
@@ -169,7 +178,7 @@ namespace Geometry
      * @return Point<T> a x b
      */
     template <typename T>
-    Point<T> cross(Point<T> a, Point<T> b);
+    extern Point<T> cross(Point<T> a, Point<T> b);
     /**
      *  @brief Return the intersection of two line segments .
      *  @param  p0  Start of first line segment.

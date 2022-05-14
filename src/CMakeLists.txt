@@ -15,12 +15,13 @@
     endforeach()
     message(STATUS "print_all_variables------------------------------------------}")
 endmacro()
-
+# Add SFML
  find_package(SFML 2.5.1 COMPONENTS system graphics audio network window REQUIRED)
 
 include_directories(${SFML_INCLUDE_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_executable (ray_tracer ${SOURCE_FILES})
+# My libraries
 add_subdirectory(include)
-target_link_libraries(ray_tracer sfml-graphics sfml-audio sfml-window)
+target_link_libraries(ray_tracer sfml-graphics sfml-audio sfml-window includes)
