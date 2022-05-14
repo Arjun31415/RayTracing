@@ -140,14 +140,14 @@ namespace Geometry
      * @param val angle in radians
      * @return double angle in degrees
      */
-    inline double rad_to_deg(double val);
+    inline double rad_to_deg(double val) { return val * 180 / M_PI; }
     /**
      * @brief does what you think
      *
      * @param val angle in degrees
      * @return double angle in radians
      */
-    inline double deg_to_rad(double val);
+    inline double deg_to_rad(double val) { return val * M_PI / 180; }
     /**
      * @brief returns the dot product of two vectors
      *

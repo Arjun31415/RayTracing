@@ -29,8 +29,6 @@ T Geometry::inv_sqrt(T x)
         y = y * (1.5 - (x2 * y * y));
     return y;
 }
-inline double rad_to_deg(double val) { return val * 180 / M_PI; }
-inline double deg_to_rad(double val) { return val * M_PI / 180; }
 template <typename T>
 T Geometry::dot(Geometry::Point<T> a, Geometry::Point<T> b)
 {

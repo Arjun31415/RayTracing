@@ -7,6 +7,8 @@
  *
  */
 #pragma once
+#include "Geometry.hpp"
+
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <cmath>
@@ -14,14 +16,14 @@
 #include <vector>
 inline namespace Object
 {
-constexpr const double EPSILON = 1e-7;
-class Player
-{
+  constexpr const double EPSILON = 1e-7;
+  class Player
+  {
     double x, y, r;
     constexpr const static double DELTA = 0.5;
     const static unsigned int POINT_COUNT = 50;
-    constexpr const static int FOV = 120;
-    const static unsigned int DTHETA = 10;
+    constexpr const static int FOV = 180;
+    const static unsigned int DTHETA = 2;
     double w, h;
     void moveX(double);
     void moveY(double);
@@ -36,6 +38,9 @@ class Player
     void moveLeft();
     void moveUp();
     void moveDown();
-    void draw(sf::RenderWindow &);
-};
+    void
+    draw(sf::RenderWindow &,
+         const std::vector<
+             std::pair<Geometry::Point<double>, Geometry::Point<double>>> &);
+  };
 } // namespace Object
