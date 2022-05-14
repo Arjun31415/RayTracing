@@ -1,0 +1,5 @@
+# target_sources(ray_tracer PUBLIC Player.hpp Player.cpp Geometry.hpp Geometry.cpp)
+# target_include_directories(ray_tracer PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+set(physics_source_files Geometry.hpp Geometry.cpp)
+add_library(Physics ${physics_source_files})
+target_link_libraries(Physics MyDebug)

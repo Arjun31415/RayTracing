@@ -7,7 +7,7 @@
  *
  */
 #pragma once
-#include "Geometry.hpp"
+#include "Physics/Geometry.hpp"
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

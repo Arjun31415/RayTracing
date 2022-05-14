@@ -8,7 +8,7 @@
  *
  */
 #define debugging
-#include "include/Geometry.hpp"
+#include "include/Physics/Geometry.hpp"
 #include "include/Player.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/Keyboard.hpp>
