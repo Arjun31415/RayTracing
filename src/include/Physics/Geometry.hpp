@@ -109,6 +109,7 @@ namespace Geometry
 		}
 		bool operator!=(const Point<T> &other) { return (!(*this == other)); }
 		T modulus() { return abs(sqrt(x * x + y * y + z * z)); }
+		// for finding the left most and bottommost point
 		bool operator<(const Point<T> &b)
 		{
 			if (this->x == b.x) return this->y < b.y;
@@ -199,6 +200,23 @@ namespace Geometry
 	template <typename T>
 	int intersection(Point<T> p0, Point<T> p1, Point<T> p2, Point<T> p3,
 					 Point<T> &intx);
+	/**
+	 *  @brief Return the intersection of a ray and a line segment .
+	 *  @param  p0  Origin of the ray.
+	 *  @param  p1  Direction of the ray.
+	 *  @param  p2  Start of line segment.
+	 *  @param  p3  End of line segment.
+	 *  @param  intx  the intersection Point.
+	 *  @return  Returns 1 if the lines intersect,2 if lines are collinear,3 if
+	 * lines are parallel,otherwise 0 It is based on an algorithm in Andre
+	 * LeMothe's "Tricks of the Windows Game Programming Gurus" the refrence
+	 * Point will store null intx stores the intersection Point if it exists
+	 * else will be intialized to null
+	 */
+
+	template <typename T>
+	int ray_intersection(Point<T> p0, Point<T> p1, Point<T> p2, Point<T> p3,
+						 Point<T> &intx);
 	/**
 	 * @brief does what you think
 	 * (b-a) x (c-b)

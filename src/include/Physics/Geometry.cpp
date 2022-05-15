@@ -104,6 +104,64 @@ int Geometry::intersection(Geometry::Point<T> p0, Geometry::Point<T> p1,
 	return 0; // No collision
 }
 template <typename T>
+
+int Geometry::ray_intersection(Geometry::Point<T> p0, Geometry::Point<T> p1,
+							   Geometry::Point<T> p2, Geometry::Point<T> p3,
+							   Geometry::Point<T> &intx)
+{
+	/**
+	 *  @brief Return the intersection of a ray and a line segment .
+	 *  @param  p0  Origin of the ray.
+	 *  @param  p1  Direction of the ray.
+	 *  @param  p2  Start of line segment.
+	 *  @param  p3  End of line segment.
+	 *  @param  intx  the intersection Point.
+	 *  @return  Returns 1 if the lines intersect,2 if lines are collinear,3 if
+	 * lines are parallel,otherwise 0 It is based on an algorithm in Andre
+	 * LeMothe's "Tricks of the Windows Game Programming Gurus" the refrence
+	 * Point will store null intx stores the intersection Point if it exists
+	 * else will be intialized to null
+	 */
+	double p0_x = p0.x, p0_y = p0.y;
+	double p1_x = p1.x, p1_y = p1.y;
+	double p2_x = p2.x, p2_y = p2.y;
+	double p3_x = p3.x, p3_y = p3.y;
+	double s1_x, s1_y, s2_x, s2_y;
+	s1_x = p1_x - p0_x;
+	s1_y = p1_y - p0_y;
+	s2_x = p3_x - p2_x;
+	s2_y = p3_y - p2_y;
+
+	double s, t;
+	double den = (-s2_x * s1_y + s1_x * s2_y);
+
+	if (den == 0 or abs(den) <= epsilon)
+	{
+
+		// parallel or collinear lines
+		// if they are collinear then their slope will be the same for any two
+		// pair of Points
+		if (p0.slope2D(p1) == p1.slope2D(p2) &&
+			p2.slope2D(p3) == p3.slope2D(p0) &&
+			p1.slope2D(p0) == p0.slope2D(p3))
+			return 2;
+		return 3;
+	}
+	s = (-s1_y * (p0_x - p2_x) + s1_x * (p0_y - p2_y)) / den;
+	t = (s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / den;
+
+	if (s >= 0 && s <= 1 && t >= 0)
+	{
+		// Collision detected
+		intx.x = p0_x + (t * s1_x);
+		intx.y = p0_y + (t * s1_y);
+
+		return 1;
+	}
+	return 0; // No collision
+}
+
+template <typename T>
 double Geometry::signed_area_of_parallelogram(Geometry::Point<T> a,
 											  Geometry::Point<T> b,
 											  Geometry::Point<T> c)
@@ -264,3 +322,5 @@ remove_redundant(std::vector<Geometry::Point<T>> v, int n)
 }
 template Geometry::Point<double> Geometry::cross(Geometry::Point<double> a,
 												 Geometry::Point<double> b);
+template double Geometry::dot(Geometry::Point<double> a,
+							  Geometry::Point<double> b);

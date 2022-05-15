@@ -5,8 +5,6 @@
  * @version 0.1
  * @date 2022-05-13
  *
- * @copyright Copyright (c) 2022
- *
  */
 #include "Player.hpp"
 #include "debug/debug.hpp"
@@ -57,17 +55,20 @@ inline namespace Object
 	void Player::draw(sf::RenderWindow &window,
 					  const vector<pair<Point, Point>> &lines)
 	{
+		// the light source
 		unique_ptr<sf::CircleShape> p(
 			new sf::CircleShape(this->r, POINT_COUNT));
-		Vertex origin(Vector2f(this->x, this->y));
+
 		p->setOrigin(this->x, this->y);
 		vector<Vertex> end_points;
+		float y1 = this->y, x1 = this->x;
+		auto cmp = [](const Point &a, const Point &b)
+		{ return dot(a, a) < dot(b, b); };
 		for (int i = 0; i <= FOV; i += DTHETA)
 		{
-			pair<float, float> end_point;
+			Point end_point(this->w + 1, this->h + 1, 100);
 			float x_v = cos(Geometry::deg_to_rad(i));
 			float y_v = sin(Geometry::deg_to_rad(i));
-			float y1 = this->y, x1 = this->x;
 
 			const Point ray =
 				Geometry::cross(Point(0, 0, 1), Point(x_v, y_v, 1));
@@ -94,23 +95,24 @@ inline namespace Object
 					if ((int)Q.x >= x2 && (int)Q.x <= x3 && (int)Q.y >= y2 &&
 						(int)Q.y <= y3)
 						chosen = 1;
-					if (chosen)
-					{
-						end_point = {(Q.x + x1 < EPSILON ? 0 : Q.x + x1),
-									 (y1 - Q.y < EPSILON ? 0 : y1 - Q.y)};
-
-						break;
-					}
-					else continue;
+					if (chosen) end_point = std::min(Q, end_point, cmp);
 				}
 			}
 			// debug(end_point);
-			end_points.push_back(
-				Vertex(Vector2f(end_point.first, end_point.second)));
+			end_point.x += x1, end_point.y = y1 - end_point.y;
+			end_points.push_back(Vertex(Vector2f(end_point.x, end_point.y)));
 		}
+		Vertex origin(Vector2f(this->x, this->y));
 		for (auto &e : end_points)
 		{
 			sf::Vertex vertices[] = {origin, e};
+			window.draw(vertices, 2, sf::Lines);
+		}
+		for (auto &line : lines)
+		{
+			sf::Vertex vertices[] = {
+				Vertex(Vector2f(line.first.x, line.first.y)),
+				Vertex(Vector2f(line.second.x, line.second.y))};
 			window.draw(vertices, 2, sf::Lines);
 		}
 		window.draw(*p);
