@@ -64,6 +64,10 @@ namespace Geometry
 		{
 			return Point(this->x - b.x, this->y - b.y, this->z - b.z);
 		}
+		Point operator-(Point<T> &b)
+		{
+			return Point(this->x - b.x, this->y - b.y, this->z - b.z);
+		}
 		T distance(const Point<T> &p)
 		{
 			return sqrt((this->x - p.x) * (this->x - p.x) +

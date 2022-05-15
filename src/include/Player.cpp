@@ -6,6 +6,7 @@
  * @date 2022-05-13
  *
  */
+#include "Physics/Geometry.hpp"
 #include "Player.hpp"
 #include "debug/debug.hpp"
 #include <SFML/Graphics/PrimitiveType.hpp>
@@ -69,36 +70,20 @@ inline namespace Object
 			Point end_point(this->w + 1, this->h + 1, 100);
 			float x_v = cos(Geometry::deg_to_rad(i));
 			float y_v = sin(Geometry::deg_to_rad(i));
-
-			const Point ray =
-				Geometry::cross(Point(0, 0, 1), Point(x_v, y_v, 1));
+			const Point ray_dir = Point(x_v, y_v);
 			for (auto &line : lines)
 			{
 				auto [p1, p2] = line;
-				p1.x -= x1, p1.y = y1 - p1.y, p1.z = 1;
-				p2.x -= x1, p2.y = y1 - p2.y, p2.z = 1;
-
-				Point l = Geometry::cross(p1, p2);
-				Point Q = Geometry::cross(l, ray);
-				if (Q.z == 0) continue;
-				Q /= Q.z;
-				// if (i == 100)
-				// {
-				//     debug(line, p1, p2, i);
-				//     debug(l, ray, Q, end_point);
-				// }
-				if (Q.x * x_v >= 0 && Q.y * y_v >= 0)
+				p1.x -= x1, p1.y = y1 - p1.y, p1.z = 0;
+				p2.x -= x1, p2.y = y1 - p2.y, p2.z = 0;
+				Point intx;
+				int temp = Geometry::ray_intersection(Point(0, 0, 0), ray_dir,
+													  p1, p2, intx);
+				if (temp == 1)
 				{
-					int x2 = std::min(p1.x, p2.x), y2 = std::min(p1.y, p2.y),
-						x3 = std::max(p1.x, p2.x), y3 = std::max(p1.y, p2.y);
-					bool chosen = false;
-					if ((int)Q.x >= x2 && (int)Q.x <= x3 && (int)Q.y >= y2 &&
-						(int)Q.y <= y3)
-						chosen = 1;
-					if (chosen) end_point = std::min(Q, end_point, cmp);
+					end_point = std::min(intx, end_point, cmp);
 				}
 			}
-			// debug(end_point);
 			end_point.x += x1, end_point.y = y1 - end_point.y;
 			end_points.push_back(Vertex(Vector2f(end_point.x, end_point.y)));
 		}

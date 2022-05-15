@@ -324,3 +324,8 @@ template Geometry::Point<double> Geometry::cross(Geometry::Point<double> a,
 												 Geometry::Point<double> b);
 template double Geometry::dot(Geometry::Point<double> a,
 							  Geometry::Point<double> b);
+template int Geometry::ray_intersection(Geometry::Point<double> p0,
+										Geometry::Point<double> p1,
+										Geometry::Point<double> p2,
+										Geometry::Point<double> p3,
+										Geometry::Point<double> &intx);

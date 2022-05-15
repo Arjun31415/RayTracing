@@ -23,7 +23,7 @@ inline namespace Object
     constexpr const static double DELTA = 0.5;
     const static unsigned int POINT_COUNT = 50;
     constexpr const static int FOV = 180;
-    const static unsigned int DTHETA = 2;
+    const static unsigned int DTHETA = 1;
     double w, h;
     void moveX(double);
     void moveY(double);

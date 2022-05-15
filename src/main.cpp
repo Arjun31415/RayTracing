@@ -31,7 +31,7 @@ int main()
 	lines.push_back({Point(0, 0), Point(0, HEIGHT)});
 	lines.push_back({Point(0, HEIGHT), Point(WIDTH, HEIGHT)});
 	lines.push_back({Point(WIDTH, 0), Point(WIDTH, HEIGHT)});
-	lines.push_back({Point(100, 100), Point(200, 100)});
+	lines.push_back({Point(100, 500), Point(200, 500)});
 	while (window.isOpen())
 	{
 		sf::Event event;
