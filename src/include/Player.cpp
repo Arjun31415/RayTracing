@@ -9,6 +9,7 @@
 #include "Physics/Geometry.hpp"
 #include "Player.hpp"
 #include "debug/debug.hpp"
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/PrimitiveType.hpp>
 #include <SFML/Graphics/Vertex.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -59,13 +60,11 @@ inline namespace Object
 		// the light source
 		unique_ptr<sf::CircleShape> p(
 			new sf::CircleShape(this->r, POINT_COUNT));
-
-		p->setOrigin(this->x, this->y);
 		vector<Vertex> end_points;
 		float y1 = this->y, x1 = this->x;
 		auto cmp = [](const Point &a, const Point &b)
 		{ return dot(a, a) < dot(b, b); };
-		for (int i = 0; i <= FOV; i += DTHETA)
+		for (double i = turn; i <= turn + FOV; i += DTHETA)
 		{
 			Point end_point(this->w + 1, this->h + 1, 100);
 			float x_v = cos(Geometry::deg_to_rad(i));
@@ -85,21 +84,24 @@ inline namespace Object
 				}
 			}
 			end_point.x += x1, end_point.y = y1 - end_point.y;
-			end_points.push_back(Vertex(Vector2f(end_point.x, end_point.y)));
+			end_points.push_back(
+				Vertex(Vector2f(end_point.x, end_point.y), sf::Color::Red));
 		}
-		Vertex origin(Vector2f(this->x, this->y));
+		Vertex origin(Vector2f(this->x, this->y), sf::Color::Red);
 		for (auto &e : end_points)
 		{
 			sf::Vertex vertices[] = {origin, e};
 			window.draw(vertices, 2, sf::Lines);
+			/* window.draw(&e, 1, sf::Points); */
 		}
-		for (auto &line : lines)
-		{
-			sf::Vertex vertices[] = {
-				Vertex(Vector2f(line.first.x, line.first.y)),
-				Vertex(Vector2f(line.second.x, line.second.y))};
-			window.draw(vertices, 2, sf::Lines);
-		}
+		/* for (auto &line : lines) */
+		/* { */
+		/* 	sf::Vertex vertices[] = { */
+		/* 		Vertex(Vector2f(line.first.x, line.first.y)), */
+		/* 		Vertex(Vector2f(line.second.x, line.second.y))}; */
+		/* 	window.draw(vertices, 2, sf::Lines); */
+		/* } */
+		p->setPosition(this->x - this->r, this->y - this->r);
 		window.draw(*p);
 	}
 } // namespace Object

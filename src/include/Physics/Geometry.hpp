@@ -19,7 +19,7 @@ namespace Geometry
 #define all(A) A.begin(), A.end()
 #define trace(x) cerr << #x << ": " << x << " " << endl;
 #define sign(x) (x > 0) - (x < 0)
-#define epsilon 1e-9
+	const double epsilon = 1e-9;
 	template <typename T>
 	class Point
 	{

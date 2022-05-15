@@ -7,15 +7,15 @@ let WebDevIconsNerdTreeGitPluginForceVAlign =  1
 let Lf_PopupColorscheme = "gruvbox_material"
 let UltiSnipsJumpForwardTrigger = "<tab>"
 let DevIconsEnableFoldersOpenClose =  0 
-let TrailingWhitespace_ns =  24 
 let UltiSnipsRemoveSelectModeMappings =  0 
 let WebDevIconsNerdTreeAfterGlyphPadding = " "
-let WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ""
 let DevIconsEnableFolderExtensionPatternMatching =  0 
 let DevIconsEnableDistro =  1 
 let WebDevIconsUnicodeDecorateFileNodes =  1 
 let DevIconsEnableFolderPatternMatching =  1 
+let TrailingWhitespace_ns =  27 
 let WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ""
+let UltiSnipsDebugPort =  8080 
 let WebDevIconsTabAirLineAfterGlyphPadding = ""
 let DevIconsArtifactFixChar = " "
 let Lf_ShortcutB = ""
@@ -24,21 +24,27 @@ let WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ""
 let NERDTreeGitStatusUpdateOnCursorHold =  1 
 let WebDevIconsUnicodeDecorateFolderNodesExactMatches =  1 
 let UltiSnipsEnableSnipMate =  0 
+let WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ""
 let DevIconsAppendArtifactFix =  0 
 let Lf_UseVersionControlTool =  0 
 let WebDevIconsUnicodeDecorateFolderNodes =  1 
+let UltiSnipsDebugServerEnable =  0 
 let WebDevIconsNerdTreeBeforeGlyphPadding = " "
 let WebDevIconsUnicodeDecorateFolderNodesSymlinkSymbol = ""
 let UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 let Lf_DefaultMode = "NameOnly"
 let WebDevIconsUnicodeGlyphDoubleWidth =  1 
 let Lf_ShowHidden =  1 
+let UltiSnipsDebugHost = "localhost"
 let XkbSwitchEnabled =  1 
 let NERDTreeUpdateOnCursorHold =  1 
 let Lf_ShortcutF = ""
 let DevIconsDefaultFolderOpenSymbol = ""
 let Lf_DefaultExternalTool = "rg"
 let Lf_UseMemoryCache =  0 
+let UltiSnipsPMDebugBlocking =  0 
+let UltiSnipsListSnippets = "<c-tab>"
+let UltiSnipsEditSplit = "normal"
 let Lf_UseCache =  0 
 let WebDevIconsTabAirLineBeforeGlyphPadding = " "
 silent only
@@ -49,14 +55,26 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +34 /mnt/shared/CODING/cpp-graphics/src/include/Player.cpp
+badd +78 /mnt/shared/CODING/cpp-graphics/src/include/Player.cpp
+badd +67 /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.hpp
+badd +106 /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp
+badd +41 /mnt/shared/CODING/cpp-graphics/src/main.cpp
+badd +37 /mnt/shared/CODING/cpp-graphics/src/include/Player.hpp
 argglobal
 %argdel
-$argadd .
-edit /mnt/shared/CODING/cpp-graphics/src/include/Player.cpp
+$argadd ./
+edit /mnt/shared/CODING/cpp-graphics/src/include/Player.hpp
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
 wincmd t
@@ -66,6 +84,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+wincmd =
 argglobal
 balt /mnt/shared/CODING/cpp-graphics/src/include/Player.cpp
 setlocal fdm=manual
@@ -78,12 +97,65 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 34 - ((3 * winheight(0) + 23) / 47)
+let s:l = 37 - ((28 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 34
-normal! 013|
+keepjumps 37
+normal! 015|
+wincmd w
+argglobal
+if bufexists(fnamemodify("/mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp", ":p")) | buffer /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp | else | edit /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp | endif
+if &buftype ==# 'terminal'
+  silent file /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp
+endif
+balt /mnt/shared/CODING/cpp-graphics/src/main.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 106 - ((3 * winheight(0) + 11) / 23)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 106
+normal! 021|
+wincmd w
+argglobal
+if bufexists(fnamemodify("/mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.hpp", ":p")) | buffer /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.hpp | else | edit /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.hpp | endif
+if &buftype ==# 'terminal'
+  silent file /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.hpp
+endif
+balt /mnt/shared/CODING/cpp-graphics/src/include/Physics/Geometry.cpp
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 70 - ((6 * winheight(0) + 11) / 23)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 70
+let s:c = 9 - ((6 * winwidth(0) + 47) / 94)
+if s:c > 0
+  exe 'normal! ' . s:c . '|zs' . 9 . '|'
+else
+  normal! 09|
+endif
+wincmd w
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -99,7 +171,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 let g:this_session = v:this_session
 let g:this_obsession = v:this_session
 doautoall SessionLoadPost
