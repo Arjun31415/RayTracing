@@ -8,3 +8,6 @@ cmake ../src
 make
 ./ray_tracer
 ```
+### Controls-
+W S A D to move 
+J K to turn
