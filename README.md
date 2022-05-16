@@ -9,5 +9,5 @@ make
 ./ray_tracer
 ```
 ### Controls-
-W S A D to move 
+W S A D to move <br>
 J K to turn
