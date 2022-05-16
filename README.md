@@ -1,2 +1,2 @@
 # RayTracing
-Raytracing with SFML (barley works)
+Raytracing with SFML
