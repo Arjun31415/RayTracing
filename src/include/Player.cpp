@@ -23,12 +23,7 @@ inline namespace Object
 	using std::pair;
 	using std::unique_ptr;
 	using std::vector;
-	Player::Player()
-	{
-		x = 0;
-		y = 0;
-		r = 0;
-	}
+	Player::Player() : x(0), y(0), r(0) {}
 	Player::Player(double x, double y, double r) : x(x), y(y), r(r) {}
 	Player::Player(double x, double y, double r, double w, double h)
 		: x(x), y(y), r(r), w(w), h(h)
@@ -67,21 +62,24 @@ inline namespace Object
 		for (double i = turn; i <= turn + FOV; i += DTHETA)
 		{
 			Point end_point(this->w + 1, this->h + 1, 100);
-			float x_v = cos(Geometry::deg_to_rad(i));
-			float y_v = sin(Geometry::deg_to_rad(i));
-			const Point ray_dir = Point(x_v, y_v);
+			float *x_v = new float(cos(Geometry::deg_to_rad(i)));
+			float *y_v = new float(sin(Geometry::deg_to_rad(i)));
+			const Point ray_dir = Point(*x_v, *y_v);
+			delete x_v;
+			delete y_v;
 			for (auto &line : lines)
 			{
 				auto [p1, p2] = line;
 				p1.x -= x1, p1.y = y1 - p1.y, p1.z = 0;
 				p2.x -= x1, p2.y = y1 - p2.y, p2.z = 0;
 				Point intx;
-				int temp = Geometry::ray_intersection(Point(0, 0, 0), ray_dir,
-													  p1, p2, intx);
-				if (temp == 1)
+				int *temp = new int(Geometry::ray_intersection(
+					Point(0, 0, 0), ray_dir, p1, p2, intx));
+				if (*temp == 1)
 				{
 					end_point = std::min(intx, end_point, cmp);
 				}
+				delete temp;
 			}
 			end_point.x += x1, end_point.y = y1 - end_point.y;
 			end_points.push_back(
@@ -94,6 +92,7 @@ inline namespace Object
 			window.draw(vertices, 2, sf::Lines);
 			/* window.draw(&e, 1, sf::Points); */
 		}
+		// Uncomment the following to see the generated lines
 		/* for (auto &line : lines) */
 		/* { */
 		/* 	sf::Vertex vertices[] = { */
