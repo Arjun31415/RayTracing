@@ -7,9 +7,9 @@ template <typename T, char iterations>
 
 T Geometry::inv_sqrt(T x)
 {
-	static_assert(std::is_floating_point<T>::value, "T must be floating Point");
+	static_assert(std::is_floating_point_v<T>, "T must be floating Point");
 	static_assert(
-		iterations >= 1 and iterations <= 5,
+		iterations >= 1 && iterations <= 5,
 		"itarations must lie between [1 , 5] and must be integer values");
 	typedef typename std::conditional<sizeof(T) == 8, std::int64_t,
 									  std::int32_t>::type Tint;

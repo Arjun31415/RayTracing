@@ -6,9 +6,9 @@
 #include <ostream>
 #include <queue>
 #include <set>
+#include <type_traits>
 #include <unordered_set>
 #include <vector>
-
 namespace Geometry
 {
 	using namespace std;
