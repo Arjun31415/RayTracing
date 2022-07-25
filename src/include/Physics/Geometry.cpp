@@ -11,8 +11,9 @@ T Geometry::inv_sqrt(T x)
 	static_assert(
 		iterations >= 1 && iterations <= 5,
 		"itarations must lie between [1 , 5] and must be integer values");
-	typedef typename std::conditional<sizeof(T) == 8, std::int64_t,
-									  std::int32_t>::type Tint;
+	typedef
+		typename std::conditional_t<sizeof(T) == 8, std::int64_t, std::int32_t>
+			Tint;
 	T y = x;
 	T x2 = y * 0.5;
 	Tint i = *(Tint *)&y;
@@ -78,7 +79,7 @@ int Geometry::intersection(Geometry::Point<T> p0, Geometry::Point<T> p1,
 	double s, t;
 	double den = (-s2_x * s1_y + s1_x * s2_y);
 
-	if (den == 0 or abs(den) <= epsilon)
+	if (den == 0 || abs(den) <= epsilon)
 	{
 
 		// parallel or collinear lines
@@ -135,7 +136,7 @@ int Geometry::ray_intersection(Geometry::Point<T> p0, Geometry::Point<T> p1,
 	double s, t;
 	double den = (-s2_x * s1_y + s1_x * s2_y);
 
-	if (den == 0 or abs(den) <= epsilon)
+	if (den == 0 || abs(den) <= epsilon)
 	{
 
 		// parallel or collinear lines
@@ -278,7 +279,7 @@ std::vector<Geometry::Point<T>> minkowski_sum(std::vector<Geometry::Point<T>> a,
 
 	for (int i = 0; i < n + m; i++)
 	{
-		if (!mark.count(i))
+		if (!mark.contains(i))
 		{
 			vv.push_back(v[i]);
 		}
@@ -298,14 +299,14 @@ remove_redundant(std::vector<Geometry::Point<T>> v, int n)
 		n >= 0 && n <= v.size(),
 		"n must be greater than 0 and less than the size of the array");
 	std::unordered_set<int> mark;
-	if (n == 0) int n = v.size();
+	if (n == 0) n = v.size();
 
 	for (int i = 0; i < n; i++)
 	{
-		if (direction(v[i], v[(i + 1) % (n)], v[(i + 2) % (n)]) == 0)
+		if (direction(v[i], v[(i + 1) % n], v[(i + 2) % n]) == 0)
 		{
 			// redundant Point
-			mark.insert((i + 1) % (n));
+			mark.insert((i + 1) % n);
 		}
 	}
 
@@ -313,7 +314,7 @@ remove_redundant(std::vector<Geometry::Point<T>> v, int n)
 
 	for (int i = 0; i < n; i++)
 	{
-		if (!mark.count(i))
+		if (!mark.contains(i))
 		{
 			vv.push_back(v[i]);
 		}
