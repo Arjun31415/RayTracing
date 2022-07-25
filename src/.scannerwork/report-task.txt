@@ -1,0 +1,7 @@
+organization=arjun31415
+projectKey=Arjun31415_RayTracing
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.30401
+dashboardUrl=https://sonarcloud.io/dashboard?id=Arjun31415_RayTracing
+ceTaskId=AYI2BNP27JkJTDBar9ES
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYI2BNP27JkJTDBar9ES
